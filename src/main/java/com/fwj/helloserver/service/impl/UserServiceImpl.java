@@ -18,10 +18,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Result<String> register(UserDTO userDTO) {
-        User exist = userMapper.selectOne(new LambdaQueryWrapper<User>()
-                .eq(User::getUsername, userDTO.getUsername()));
+        LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(User::getUsername, userDTO.getUsername());
+        User dbUser = userMapper.selectOne(queryWrapper);
 
-        if (exist != null) {
+        if (dbUser != null) {
             return Result.error(ResultCode.USER_HAS_EXISTED);
         }
 
@@ -30,22 +31,32 @@ public class UserServiceImpl implements UserService {
         user.setPassword(userDTO.getPassword());
         userMapper.insert(user);
 
-        return Result.success("注册成功");
+        return Result.success("注册成功！");
     }
 
     @Override
     public Result<String> login(UserDTO userDTO) {
-        User user = userMapper.selectOne(new LambdaQueryWrapper<User>()
-                .eq(User::getUsername, userDTO.getUsername()));
+        LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(User::getUsername, userDTO.getUsername());
+        User dbUser = userMapper.selectOne(queryWrapper);
 
-        if (user == null) {
+        if (dbUser == null) {
             return Result.error(ResultCode.USER_NOT_EXIST);
         }
 
-        if (!user.getPassword().equals(userDTO.getPassword())) {
+        if (!dbUser.getPassword().equals(userDTO.getPassword())) {
             return Result.error(ResultCode.PASSWORD_ERROR);
         }
 
-        return Result.success("登录成功");
+        return Result.success("登录成功！");
+    }
+
+    @Override
+    public Result<String> getUserById(Long id) {
+        User user = userMapper.selectById(id);
+        if (user == null) {
+            return Result.error("用户不存在");
+        }
+        return Result.success("查询成功：" + user.getUsername());
     }
 }

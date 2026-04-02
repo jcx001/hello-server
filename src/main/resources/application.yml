@@ -1,12 +1,13 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    # 👇 1. 确保数据库名 lab_db 存在！
-    url: jdbc:mysql://localhost:3306/lab_db?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
-    # 👇 2. 确保账号密码正确 (默认 root/123456)
+    # 连接你刚创建的 hello_server 数据库
+    url: jdbc:mysql://localhost:3306/hello_server?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false
     username: root
-    password: 123456 # 如果你的密码不是 123456，必须改成你的实际密码！
+    # 填你自己的 MySQL 密码（就是你登录命令行用的那个）
+    password: 123456
 
+# MyBatis-Plus 配置，打印SQL日志方便调试
 mybatis-plus:
   configuration:
-    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
