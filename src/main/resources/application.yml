@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    # 👇 1. 确保数据库名 lab_db 存在！
+    url: jdbc:mysql://localhost:3306/lab_db?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+    # 👇 2. 确保账号密码正确 (默认 root/123456)
+    username: root
+    password: 123456 # 如果你的密码不是 123456，必须改成你的实际密码！
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true

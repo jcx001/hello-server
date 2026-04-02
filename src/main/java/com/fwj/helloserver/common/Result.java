@@ -1,31 +1,29 @@
 package com.fwj.helloserver.common;
 
+import lombok.Data;
+
+@Data
 public class Result<T> {
-    private Integer code;
+    private int code;
     private String msg;
     private T data;
 
     public static <T> Result<T> success(T data) {
         Result<T> result = new Result<>();
-        result.code = ResultCode.SUCCESS.getCode();
-        result.msg = ResultCode.SUCCESS.getMsg();
-        result.data = data;
+        result.setCode(ResultCode.SUCCESS.getCode());
+        result.setMsg(ResultCode.SUCCESS.getMessage());
+        result.setData(data);
         return result;
+    }
+
+    public static <T> Result<T> success() {
+        return success(null);
     }
 
     public static <T> Result<T> error(ResultCode resultCode) {
         Result<T> result = new Result<>();
-        result.code = resultCode.getCode();
-        result.msg = resultCode.getMsg();
-        result.data = null;
+        result.setCode(resultCode.getCode());
+        result.setMsg(resultCode.getMessage());
         return result;
     }
-
-    // 手动添加 Getter 和 Setter
-    public Integer getCode() { return code; }
-    public void setCode(Integer code) { this.code = code; }
-    public String getMsg() { return msg; }
-    public void setMsg(String msg) { this.msg = msg; }
-    public T getData() { return data; }
-    public void setData(T data) { this.data = data; }
 }
