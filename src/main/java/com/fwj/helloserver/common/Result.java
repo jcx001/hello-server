@@ -9,21 +9,24 @@ public class Result<T> {
     private T data;
 
     public static <T> Result<T> success(T data) {
-        Result<T> result = new Result<>();
-        result.setCode(ResultCode.SUCCESS.getCode());
-        result.setMsg(ResultCode.SUCCESS.getMessage());
-        result.setData(data);
-        return result;
+        Result<T> r = new Result<>();
+        r.setCode(200);
+        r.setMsg("success");
+        r.setData(data);
+        return r;
     }
 
-    public static <T> Result<T> success() {
-        return success(null);
+    public static <T> Result<T> error(String msg) {
+        Result<T> r = new Result<>();
+        r.setCode(500);
+        r.setMsg(msg);
+        return r;
     }
 
     public static <T> Result<T> error(ResultCode resultCode) {
-        Result<T> result = new Result<>();
-        result.setCode(resultCode.getCode());
-        result.setMsg(resultCode.getMessage());
-        return result;
+        Result<T> r = new Result<>();
+        r.setCode(resultCode.getCode());
+        r.setMsg(resultCode.getMsg());
+        return r;
     }
 }
