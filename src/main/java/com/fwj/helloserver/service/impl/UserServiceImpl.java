@@ -55,7 +55,7 @@ public class UserServiceImpl implements UserService {
     public Result<String> getUserById(Long id) {
         User user = userMapper.selectById(id);
         if (user == null) {
-            return Result.error("用户不存在");
+            return Result.error(ResultCode.USER_NOT_EXIST);
         }
         return Result.success("查询成功：" + user.getUsername());
     }

@@ -7,13 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/user")
 public class UserController {
 
     @Autowired
     private UserService userService;
 
-    @PostMapping
+    @PostMapping("/register")
     public Result<String> register(@RequestBody UserDTO userDTO) {
         return userService.register(userDTO);
     }
@@ -24,7 +24,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public Result<String> getUser(@PathVariable Long id) {
+    public Result<String> getUserById(@PathVariable Long id) {
         return userService.getUserById(id);
     }
 }
