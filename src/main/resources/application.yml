@@ -1,13 +1,17 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    # 连接你刚创建的 hello_server 数据库
     url: jdbc:mysql://localhost:3306/hello_server?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false
     username: root
-    # 填你自己的 MySQL 密码（就是你登录命令行用的那个）
     password: 123456
+  # 👇 直接在这里追加 Redis 配置
+  data:
+    redis:
+      host: 127.0.0.1
+      port: 6379
+      database: 0
 
-# MyBatis-Plus 配置，打印SQL日志方便调试
+# MyBatis-Plus 日志配置
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

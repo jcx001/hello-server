@@ -1,30 +1,35 @@
 package com.fwj.helloserver.controller;
 
 import com.fwj.helloserver.common.Result;
-import com.fwj.helloserver.dto.UserDTO;
+import com.fwj.helloserver.dto.UserDetailDTO;
+import com.fwj.helloserver.entity.User;
 import com.fwj.helloserver.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/api/users")
+@RequiredArgsConstructor
 public class UserController {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
 
-    @PostMapping("/register")
-    public Result<String> register(@RequestBody UserDTO userDTO) {
-        return userService.register(userDTO);
+    @GetMapping("/{id}/detail")
+    public Result<UserDetailDTO> getUserDetail(@PathVariable("id") Long userId) {
+        return userService.getUserDetail(userId);
     }
 
-    @PostMapping("/login")
-    public Result<String> login(@RequestBody UserDTO userDTO) {
-        return userService.login(userDTO);
+    @PutMapping("/{id}/detail")
+    public Result<String> updateUserInfo(
+            @PathVariable("id") Long userId,
+            @RequestBody User user) {
+        // 就改这一行！
+        user.setId(userId.intValue());
+        return userService.updateUserInfo(user);
     }
 
-    @GetMapping("/{id}")
-    public Result<String> getUserById(@PathVariable Long id) {
-        return userService.getUserById(id);
+    @DeleteMapping("/{id}")
+    public Result<String> deleteUser(@PathVariable("id") Long userId) {
+        return userService.deleteUser(userId);
     }
 }
