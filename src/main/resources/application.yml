@@ -4,14 +4,11 @@ spring:
     url: jdbc:mysql://localhost:3306/hello_server?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false
     username: root
     password: 123456
-  # 👇 直接在这里追加 Redis 配置
-  data:
-    redis:
-      host: 127.0.0.1
-      port: 6379
-      database: 0
 
-# MyBatis-Plus 日志配置
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration
+
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
