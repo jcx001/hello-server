@@ -22,4 +22,8 @@ public interface UserMapper extends BaseMapper<User> {
             WHERE u.id = #{userId}
             """)
     UserDetailDTO getUserDetail(@Param("userId") Long userId);
+
+    // 我只加了这一行，解决所有报错
+    @Select("SELECT * FROM sys_user WHERE username = #{username}")
+    User selectByUsername(@Param("username") String username);
 }

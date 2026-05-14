@@ -14,22 +14,34 @@ public class UserController {
 
     private final UserService userService;
 
-    @GetMapping("/{id}/detail")
-    public Result<UserDetailDTO> getUserDetail(@PathVariable("id") Long userId) {
+    // 登录
+    @PostMapping("/login")
+    public Result<String> login(@RequestParam String username,
+                                @RequestParam String password) {
+        return userService.login(username, password);
+    }
+
+    // 注册
+    @PostMapping("/register")
+    public Result<String> register(@RequestBody User user) {
+        return userService.register(user);
+    }
+
+    // 查询用户详情
+    @GetMapping("/{userId}")
+    public Result<UserDetailDTO> getUserDetail(@PathVariable Long userId) {
         return userService.getUserDetail(userId);
     }
 
-    @PutMapping("/{id}/detail")
-    public Result<String> updateUserInfo(
-            @PathVariable("id") Long userId,
-            @RequestBody User user) {
-        // 就改这一行！
-        user.setId(userId.intValue());
+    // 更新用户信息
+    @PutMapping
+    public Result<String> updateUserInfo(@RequestBody User user) {
         return userService.updateUserInfo(user);
     }
 
-    @DeleteMapping("/{id}")
-    public Result<String> deleteUser(@PathVariable("id") Long userId) {
+    // 删除用户
+    @DeleteMapping("/{userId}")
+    public Result<String> deleteUser(@PathVariable Long userId) {
         return userService.deleteUser(userId);
     }
 }

@@ -12,3 +12,9 @@ spring:
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+# JWT 配置（我只新增了这里）
+security:
+  jwt:
+    secret: your-secret-key-2026-fwj-hello-server
+    expiration-millis: 7200000
