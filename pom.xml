@@ -64,7 +64,7 @@
             <version>5.8.25</version>
         </dependency>
 
-        <!-- JWT 依赖（我只加了这3个） -->
+        <!-- JWT 依赖 -->
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt-api</artifactId>
