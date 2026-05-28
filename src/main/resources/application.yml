@@ -1,24 +1,27 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/hello_server?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false
+    url: jdbc:mysql://localhost:3306/hello_server?useUnicode=true&characterEncoding=utf8&serverTimezone=AsiaShanghai&useSSL=false
     username: root
     password: 123456
 
-  autoconfigure:
-    exclude:
-      - org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration
-
-  # 👇 下面这一段是我帮你加的 AI 聊天配置（已填好你的Key）
+  # 正确 AI 配置（我帮你修正）
   ai:
-    dashscope:
+    alibaba:
       api-key: sk-84a291399dd04712a40004f196d8c6e4
+      chat:
+        options:
+          model: qwen-turbo
+
+  # Redis 正常启用
+  redis:
+    host: localhost
+    port: 6379
 
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
-# JWT 配置
 security:
   jwt:
     secret: your-secret-key-2026-fwj-hello-server
